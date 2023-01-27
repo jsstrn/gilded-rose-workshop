@@ -1,4 +1,37 @@
 const { AGED_BRIE, BACKSTAGE_PASS, SULFURAS } = require("./constants")
+const Item = require("./Item")
+
+function updateItemQuality(quality) {
+    MAX_QUALITY = 50
+
+    return ({
+        incrementBy(value) {
+            quality += value
+            if (quality > MAX_QUALITY) {
+                quality = MAX_QUALITY
+            }
+
+            return quality
+        }
+    })
+}
+
+class AgedBrie extends Item {
+    constructor(sellIn, quality) {
+        super(AGED_BRIE, sellIn, quality)
+        this.incrementBy = updateItemQuality(quality).incrementBy
+    }
+
+    update() {
+        this.sellIn = this.sellIn - 1
+
+        if (this.sellIn < 0) {
+            this.quality = this.incrementBy(2)
+        } else {
+            this.quality = this.incrementBy(1)
+        }
+    }
+}
 
 class Shop {
     constructor(items = []) {
@@ -6,7 +39,18 @@ class Shop {
     }
 
     updateQuality() {
-        return this.items.map(this.update)
+        return this.items.map(item => {
+            if (item.name == AGED_BRIE) {
+                item = new AgedBrie(item.sellIn, item.quality)
+                item.update()
+            } else {
+                this.update(item)
+            }
+
+            return item
+        })
+
+
     }
 
     update(item) {
