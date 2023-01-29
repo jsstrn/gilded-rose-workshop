@@ -8,14 +8,14 @@ class AgedBrie extends Item {
         this.incrementBy = updateItemQuality(quality).incrementBy
     }
 
+    isExpired() {
+        return this.sellIn < 0
+    }
+
     update() {
         this.sellIn = this.sellIn - 1
-
-        if (this.sellIn < 0) {
-            this.quality = this.incrementBy(2)
-        } else {
-            this.quality = this.incrementBy(1)
-        }
+        this.quality = this.isExpired() ? this.incrementBy(2) : this.incrementBy(1)
+        return this
     }
 }
 

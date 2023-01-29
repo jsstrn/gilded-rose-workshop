@@ -10,13 +10,11 @@ class Shop {
     updateQuality() {
         return this.items.map(item => {
             if (AGED_BRIE_FEATURE && item.name == AGED_BRIE) {
-                item = new AgedBrie(item.sellIn, item.quality)
-                item.update()
-            } else {
-                this.update(item)
+                const newItem = new AgedBrie(item.sellIn, item.quality)
+                return newItem.update()
             }
 
-            return item
+            return this.update(item)
         })
 
 
