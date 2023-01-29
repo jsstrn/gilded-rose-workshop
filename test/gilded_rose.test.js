@@ -1,14 +1,14 @@
-const { Shop, Item } = require("../src/gilded_rose");
+const { Shop, Item } = require("../src/gilded_rose")
 
 describe("Gilded Rose", () => {
   it("creates a new shop with no items", () => {
-    const shop = new Shop();
+    const shop = new Shop()
 
-    expect(shop.items).toEqual([]);
-  });
+    expect(shop.items).toEqual([])
+  })
 
   describe("Regular item", () => {
-    const itemName = "Regular item";
+    const itemName = "Regular item"
 
     it.each([
       { sellIn: 2, quality: 10, expectedQuality: 9 },
@@ -17,17 +17,17 @@ describe("Gilded Rose", () => {
     ])(
       `returns quality of $expectedQuality when sellIn is $sellIn and quality is $quality`,
       ({ sellIn, quality, expectedQuality }) => {
-        const shop = new Shop([new Item(itemName, sellIn, quality)]);
+        const shop = new Shop([new Item(itemName, sellIn, quality)])
 
-        const item = shop.updateQuality()[0];
+        const item = shop.updateQuality()[0]
 
-        expect(item.quality).toBe(expectedQuality);
-      }
-    );
-  });
+        expect(item.quality).toBe(expectedQuality)
+      },
+    )
+  })
 
   describe("Aged Brie", () => {
-    const itemName = "Aged Brie";
+    const itemName = "Aged Brie"
 
     it.each([
       { sellIn: 1, quality: 3, expectedQuality: 4 },
@@ -37,17 +37,17 @@ describe("Gilded Rose", () => {
     ])(
       `returns quality of $expectedQuality when sellIn is $sellIn and quality is $quality`,
       ({ sellIn, quality, expectedQuality }) => {
-        const shop = new Shop([new Item(itemName, sellIn, quality)]);
+        const shop = new Shop([new Item(itemName, sellIn, quality)])
 
-        const agedBrie = shop.updateQuality()[0];
+        const agedBrie = shop.updateQuality()[0]
 
-        expect(agedBrie.quality).toBe(expectedQuality);
-      }
-    );
-  });
+        expect(agedBrie.quality).toBe(expectedQuality)
+      },
+    )
+  })
 
   describe("Sulfuras", () => {
-    const itemName = "Sulfuras, Hand of Ragnaros";
+    const itemName = "Sulfuras, Hand of Ragnaros"
 
     it.each([
       { sellIn: 10, quality: 20, expectedSellIn: 10, expectedQuality: 20 },
@@ -55,18 +55,18 @@ describe("Gilded Rose", () => {
     ])(
       `returns quality of $expectedQuality when sellIn is $sellIn and quality is $quality`,
       ({ sellIn, quality, expectedSellIn, expectedQuality }) => {
-        const shop = new Shop([new Item(itemName, sellIn, quality)]);
+        const shop = new Shop([new Item(itemName, sellIn, quality)])
 
-        const item = shop.updateQuality()[0];
+        const item = shop.updateQuality()[0]
 
-        expect(item.sellIn).toBe(expectedSellIn);
-        expect(item.quality).toBe(expectedQuality);
-      }
-    );
-  });
+        expect(item.sellIn).toBe(expectedSellIn)
+        expect(item.quality).toBe(expectedQuality)
+      },
+    )
+  })
 
   describe("Backstage Passes", () => {
-    const itemName = "Backstage passes to a TAFKAL80ETC concert";
+    const itemName = "Backstage passes to a TAFKAL80ETC concert"
 
     it.each([
       { sellIn: 20, quality: 20, expectedQuality: 21 },
@@ -77,12 +77,12 @@ describe("Gilded Rose", () => {
     ])(
       `returns quality of $expectedQuality when sellIn is $sellIn and quality is $quality`,
       ({ sellIn, quality, expectedQuality }) => {
-        const shop = new Shop([new Item(itemName, sellIn, quality)]);
+        const shop = new Shop([new Item(itemName, sellIn, quality)])
 
-        const item = shop.updateQuality()[0];
+        const item = shop.updateQuality()[0]
 
-        expect(item.quality).toBe(expectedQuality);
-      }
-    );
-  });
-});
+        expect(item.quality).toBe(expectedQuality)
+      },
+    )
+  })
+})
