@@ -1,6 +1,6 @@
 const { AGED_BRIE, BACKSTAGE_PASS, SULFURAS } = require("./constants")
-const { AgedBrie } = require("./items")
-const { AGED_BRIE_FEATURE } = require("./features")
+const { AgedBrie, Sulfuras } = require("./items")
+const { AGED_BRIE_FEATURE, SULFURAS_FEATURE } = require("./features")
 
 class Shop {
     constructor(items = []) {
@@ -11,6 +11,11 @@ class Shop {
         return this.items.map(item => {
             if (AGED_BRIE_FEATURE && item.name == AGED_BRIE) {
                 const newItem = new AgedBrie(item.sellIn, item.quality)
+                return newItem.update()
+            }
+
+            if (SULFURAS_FEATURE && item.name == SULFURAS) {
+                const newItem = new Sulfuras(item.sellIn, item.quality)
                 return newItem.update()
             }
 
